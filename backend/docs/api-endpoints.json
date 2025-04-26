@@ -1,0 +1,90 @@
+{
+  "hackathon": {
+    "create": {
+      "endpoint": "POST /hackathon",
+      "request": {
+        "name": "Code for Change 2024",
+        "description": "A 48-hour hackathon to build solutions for social good",
+        "startDate": "2024-11-15T09:00:00.000Z",
+        "endDate": "2024-11-17T17:00:00.000Z",
+        "location": "Innovation Hub, University Campus",
+        "urlSlug": "code-for-change-2024"
+      }
+    },
+    "getAll": {
+      "endpoint": "GET /hackathon"
+    },
+    "getById": {
+      "endpoint": "GET /hackathon/:id",
+      "example": "GET /hackathon/550e8400-e29b-41d4-a716-446655440000"
+    },
+    "getBySlug": {
+      "endpoint": "GET /hackathon/slug/:slug",
+      "example": "GET /hackathon/slug/code-for-change-2024"
+    },
+    "update": {
+      "endpoint": "PATCH /hackathon/:id",
+      "example": "PATCH /hackathon/550e8400-e29b-41d4-a716-446655440000",
+      "request": {
+        "name": "Code for Change 2024 - Updated",
+        "location": "New Innovation Hub, Main Campus"
+      }
+    },
+    "delete": {
+      "endpoint": "DELETE /hackathon/:id",
+      "example": "DELETE /hackathon/550e8400-e29b-41d4-a716-446655440000"
+    },
+    "getParticipants": {
+      "endpoint": "GET /hackathon/:id/participants",
+      "example": "GET /hackathon/550e8400-e29b-41d4-a716-446655440000/participants"
+    },
+    "addParticipant": {
+      "endpoint": "POST /hackathon/:id/participants",
+      "example": "POST /hackathon/550e8400-e29b-41d4-a716-446655440000/participants",
+      "request": {
+        "participantId": "550e8400-e29b-41d4-a716-446655440102"
+      }
+    },
+    "removeParticipant": {
+      "endpoint": "DELETE /hackathon/:id/participants/:participantId",
+      "example": "DELETE /hackathon/550e8400-e29b-41d4-a716-446655440000/participants/550e8400-e29b-41d4-a716-446655440102"
+    }
+  },
+  "feedback": {
+    "create": {
+      "endpoint": "POST /feedback",
+      "request": {
+        "rating": 4,
+        "comments": "Great hackathon! Learned a lot and met amazing people.",
+        "suggestions": "More food options would be nice for next time.",
+        "participantId": "550e8400-e29b-41d4-a716-446655440100",
+        "hackathonId": "550e8400-e29b-41d4-a716-446655440000"
+      }
+    },
+    "getAll": {
+      "endpoint": "GET /feedback"
+    },
+    "getByHackathonId": {
+      "endpoint": "GET /feedback/hackathon/:id",
+      "example": "GET /feedback/hackathon/550e8400-e29b-41d4-a716-446655440000"
+    },
+    "getByParticipantId": {
+      "endpoint": "GET /feedback/participant/:id",
+      "example": "GET /feedback/participant/550e8400-e29b-41d4-a716-446655440100"
+    },
+    "getWithQueryParams": {
+      "endpoint": "GET /feedback?hackathonId=:hackathonId or GET /feedback?participantId=:participantId",
+      "example": "GET /feedback?hackathonId=550e8400-e29b-41d4-a716-446655440000"
+    }
+  },
+  "participant": {
+    "sampleData": {
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "email": "jane.doe@example.com",
+      "school": "Tech University",
+      "major": "Computer Science",
+      "year": "3rd"
+    }
+  }
+} 

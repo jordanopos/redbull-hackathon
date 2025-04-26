@@ -1,0 +1,16 @@
+-- AlterTable
+ALTER TABLE "Feedback" ADD COLUMN     "additionalComments" TEXT,
+ADD COLUMN     "challengeDifficulty" TEXT,
+ADD COLUMN     "favoritePart" TEXT,
+ADD COLUMN     "futureParticipation" TEXT,
+ADD COLUMN     "instructionClarity" TEXT,
+ADD COLUMN     "judgingFairness" TEXT,
+ADD COLUMN     "learningExperience" TEXT,
+ADD COLUMN     "mentorSupport" TEXT,
+ADD COLUMN     "overallSatisfaction" TEXT,
+ADD COLUMN     "resourceAccess" TEXT,
+ADD COLUMN     "rubricClarity" TEXT,
+ADD COLUMN     "scheduleStructure" TEXT,
+ADD COLUMN     "staffSupport" TEXT,
+ADD COLUMN     "suggestedImprovements" TEXT,
+ALTER COLUMN "rating" DROP NOT NULL;

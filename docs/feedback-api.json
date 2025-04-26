@@ -1,0 +1,221 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Feedback API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    { "url": "https://cd6c-2606-8700-a-13-7957-bc83-5b00-8395.ngrok-free.app" }
+  ],
+  "paths": {
+    "/feedback": {
+      "post": {
+        "operationId": "createFeedback",
+        "summary": "Create new feedback",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFeedbackDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Feedback created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Feedback"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getAllFeedback",
+        "summary": "Get all feedback with optional filtering",
+        "parameters": [
+          {
+            "name": "hackathonId",
+            "in": "query",
+            "required": false,
+            "description": "Filter feedback by hackathon ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "participantId",
+            "in": "query",
+            "required": false,
+            "description": "Filter feedback by participant ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of feedback",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Feedback"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/feedback/hackathon/{id}": {
+      "get": {
+        "operationId": "getFeedbackByHackathon",
+        "summary": "Get feedback by hackathon ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Hackathon ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of feedback for a specific hackathon",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Feedback"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/feedback/participant/{id}": {
+      "get": {
+        "operationId": "getFeedbackByParticipant",
+        "summary": "Get feedback by participant ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Participant ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of feedback for a specific participant",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Feedback"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateFeedbackDto": {
+        "type": "object",
+        "required": ["email", "hackathonId"],
+        "properties": {
+          "overallSatisfaction": { "type": "string" },
+          "futureParticipation": { "type": "string" },
+          "challengeDifficulty": { "type": "string" },
+          "learningExperience": { "type": "string" },
+          "mentorSupport": { "type": "string" },
+          "staffSupport": { "type": "string" },
+          "resourceAccess": { "type": "string" },
+          "rubricClarity": { "type": "string" },
+          "judgingFairness": { "type": "string" },
+          "instructionClarity": { "type": "string" },
+          "scheduleStructure": { "type": "string" },
+          "favoritePart": { "type": "string" },
+          "suggestedImprovements": { "type": "string" },
+          "additionalComments": { "type": "string" },
+          "rating": { "type": "number" },
+          "comments": { "type": "string" },
+          "suggestions": { "type": "string" },
+          "email": { "type": "string" },
+          "hackathonId": { "type": "string" }
+        }
+      },
+      "Feedback": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "overallSatisfaction": { "type": "string" },
+          "futureParticipation": { "type": "string" },
+          "challengeDifficulty": { "type": "string" },
+          "learningExperience": { "type": "string" },
+          "mentorSupport": { "type": "string" },
+          "staffSupport": { "type": "string" },
+          "resourceAccess": { "type": "string" },
+          "rubricClarity": { "type": "string" },
+          "judgingFairness": { "type": "string" },
+          "instructionClarity": { "type": "string" },
+          "scheduleStructure": { "type": "string" },
+          "favoritePart": { "type": "string" },
+          "suggestedImprovements": { "type": "string" },
+          "additionalComments": { "type": "string" },
+          "rating": { "type": "number" },
+          "comments": { "type": "string" },
+          "suggestions": { "type": "string" },
+          "participantId": { "type": "string" },
+          "hackathonId": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" },
+          "participant": { 
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "email": { "type": "string" },
+              "firstName": { "type": "string" },
+              "lastName": { "type": "string" },
+              "school": { "type": "string" }
+            }
+          },
+          "hackathon": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "description": { "type": "string" },
+              "startDate": { "type": "string", "format": "date-time" },
+              "endDate": { "type": "string", "format": "date-time" },
+              "location": { "type": "string" },
+              "urlSlug": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+} 

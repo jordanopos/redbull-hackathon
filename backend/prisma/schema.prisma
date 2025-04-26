@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Represents a student participant in the hackathon
+model Participant {
+  id        String  @id @default(uuid())
+  firstName String?
+  lastName  String?
+  email     String  @unique()
+  school    String?
+  major     String?
+  year      String?
+
+  hackathons HackathonParticipant[]
+  feedback   Feedback[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+}
+
+// Represents feedback provided by participants
+model Feedback {
+  id String @id @default(uuid())
+
+  // General Experience
+  overallSatisfaction String? // Very satisfied, Satisfied, Neutral, Dissatisfied, Very dissatisfied
+  futureParticipation String? // Yes, No, Maybe
+
+  // Topic & Challenge
+  challengeDifficulty String? // Too easy, Easy, Just right, Difficult, Too difficult
+  learningExperience  String? // Yes I learned a lot, Somewhat I learned a few things, Neutral, Not really I didn't learn much, No I didn't learn anything new
+
+  // Support & Resources
+  mentorSupport   String? // Excellent, Good, Neutral, Poor, Very poor
+  staffSupport    String? // Excellent, Good, Neutral, Poor, Very poor
+  resourceAccess  String? // Yes everything was provided, Mostly but some things were missing, Neutral, No I needed more resources, No it was difficult to access what I needed
+  rubricClarity   String? // Very clear and understandable, Somewhat clear and understandable, Neutral, Somewhat clear and understandable, Very unclear and not understandable
+  judgingFairness String? // Very fair and fair, Somewhat fair, Neutral, Somewhat unfair, Very unfair
+
+  // Organization & Clarity
+  instructionClarity String? // Very clear, Somewhat clear, Neutral, Somewhat unclear, Very unclear
+  scheduleStructure  String? // Very well-structured, Somewhat well-structured, Neutral, Somewhat disorganized, Very disorganized
+
+  // Open-ended Feedback
+  favoritePart          String?
+  suggestedImprovements String?
+  additionalComments    String?
+
+  // Legacy fields maintained for compatibility
+  rating      Int? // Numeric rating (e.g., 1-5)
+  comments    String?
+  suggestions String?
+
+  participantId String
+  participant   Participant @relation(fields: [participantId], references: [id])
+
+  hackathonId String
+  hackathon   Hackathon @relation(fields: [hackathonId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+}
+
+// Represents a hackathon event
+model Hackathon {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  startDate   DateTime
+  endDate     DateTime
+  location    String?
+  urlSlug     String   @unique // Unique identifier for URL params
+
+  participants HackathonParticipant[]
+  feedback     Feedback[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+}
+
+// Join table for many-to-many relationship between Hackathon and Participant
+model HackathonParticipant {
+  id            String      @id @default(uuid())
+  hackathonId   String
+  hackathon     Hackathon   @relation(fields: [hackathonId], references: [id])
+  participantId String
+  participant   Participant @relation(fields: [participantId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  @@unique([hackathonId, participantId])
+}
