@@ -31,4 +31,19 @@ export class AzureController {
 
     return res.json(data);
   }
+
+  @Get('analysis')
+  async getAiAnalysys(
+    @Query('hackathonId') hackathonId: string,
+    @Res() res: Response,
+  ) {
+    const rawData = await this.azureService.runAgentConversation(
+      formatPrompt(PROMPTS.ANALYZE_FEEDBACK_EXTENDED, {
+        hackathonId: hackathonId,
+      }),
+    );
+    const data = JSON.parse(rawData);
+
+    return res.json(data);
+  }
 }

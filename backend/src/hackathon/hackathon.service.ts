@@ -2,6 +2,7 @@ import { Injectable, NotFoundException, ConflictException } from '@nestjs/common
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateHackathonDto } from './dto/create-hackathon.dto';
 import { UpdateHackathonDto } from './dto/update-hackathon.dto';
+import { HackathonStatsDto } from './dto/hackathon-stats.dto';
 
 @Injectable()
 export class HackathonService {
@@ -168,5 +169,37 @@ export class HackathonService {
     });
 
     return participants.map(hp => hp.participant);
+  }
+
+  async getHackathonStats(hackathonId: string): Promise<HackathonStatsDto> {
+    // First, check if the hackathon exists
+    const hackathon = await this.prisma.hackathon.findUnique({
+      where: { id: hackathonId },
+    });
+
+    if (!hackathon) {
+      throw new NotFoundException(`Hackathon with ID ${hackathonId} not found`);
+    }
+
+    // Count total participants
+    const totalSignups = await this.prisma.hackathonParticipant.count({
+      where: { hackathonId },
+    });
+
+    // Count total feedback submissions
+    const totalFeedback = await this.prisma.feedback.count({
+      where: { hackathonId },
+    });
+
+    // Calculate completion rate (percentage of participants who submitted feedback)
+    const completionRate = totalSignups > 0
+      ? Math.round((totalFeedback / totalSignups) * 100)
+      : 0;
+
+    return {
+      totalSignups,
+      totalFeedback,
+      completionRate,
+    };
   }
 }

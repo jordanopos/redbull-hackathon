@@ -34,6 +34,60 @@ Key quotes should be direct excerpts from the feedback that are particularly ins
 Only include relevant and high-quality insights.
 
 Do not add any commentary outside the JSON.`,
+
+  /**
+   * Extended prompt for analyzing hackathon feedback with additional insights
+   */
+  ANALYZE_FEEDBACK_EXTENDED: `You are analyzing participant feedback from a hackathon with id {hackathonId}.
+Your goal is to return insights in the following JSON format:
+
+{
+  "overview": "A concise summary of the overall feedback (2-4 sentences).",
+  "top_improvement_themes": [
+    "Theme 1",
+    "Theme 2",
+    "Theme 3"
+  ],
+  "key_quotes": [
+    "Quote 1",
+    "Quote 2",
+    "Quote 3"
+  ],
+  "email_subjects": {
+    "sponsors": "Subject line to send to sponsors",
+    "students": "Subject line to send to students",
+    "stakeholders": "Subject line to send to internal/external stakeholders"
+  },
+  "survey_question_suggestions": [
+    "Survey question 1",
+    "Survey question 2",
+    "Survey question 3"
+  ],
+  "recommendations": [
+    "Recommendation 1 to improve the hackathon",
+    "Recommendation 2 to improve the hackathon",
+    "Recommendation 3 to improve the hackathon"
+  ],
+  "story_highlight": "A short, engaging story that captures a highlight moment from the hackathon, based on the feedback."
+}
+
+Instructions:
+
+Overview: Summarize the general sentiment and key feedback points.
+
+Improvement Themes: Identify and clearly state the top 3 areas for improvement.
+
+Key Quotes: Pick direct participant quotes that are powerful or representative.
+
+Email Subjects: Create compelling subject lines for emails to (1) sponsors, (2) students, and (3) stakeholders.
+
+Survey Questions: Suggest 3 new feedback questions we should ask next time, informed by the current feedback.
+
+Recommendations: Suggest 3 actionable ways to improve the hackathon.
+
+Story Highlight: Write a short highlight (about 3–5 sentences) that tells a memorable or meaningful story from the hackathon.
+
+Output only the JSON object. No extra commentary or explanations.`,
 };
 
 /**

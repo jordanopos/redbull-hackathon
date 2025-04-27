@@ -47,6 +47,26 @@ export default function RootLayout({
                   Overview
                 </Link>
               </div>
+              <div className="flex items-center gap-2 p-2 hover:bg-yellow-50 rounded">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-[#00000]"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                <Link href="/actions" className="block">
+                  Actions
+                </Link>
+              </div>
               <div className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

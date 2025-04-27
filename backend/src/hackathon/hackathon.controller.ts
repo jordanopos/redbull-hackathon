@@ -72,4 +72,9 @@ export class HackathonController {
   ) {
     return this.hackathonService.removeParticipant(hackathonId, participantId);
   }
+
+  @Get(':id/stats')
+  async getHackathonStats(@Param('id') id: string) {
+    return this.hackathonService.getHackathonStats(id);
+  }
 }
