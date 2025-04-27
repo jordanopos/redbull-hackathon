@@ -4,6 +4,12 @@
 
 This system streamlines the feedback gathering and analysis process for organizations running hackathons. The system continuously updates in real time as new participant feedback is added, ensuring organizers have immediate access to actionable data without manual intervention. It leverages AI-powered agents, a real-time user interface, and backend automation to deliver actionable insights for process and systems improvement. Key features include tracking signup-to-feedback completion rates, generating improvement themes and key quotes, AI-generated communications (emails, social posts, survey suggestions), and providing agent-driven operational recommendations.
 
+## Demo
+
+Check out our system demo: [Hackathon Feedback Intelligence System Demo](https://www.youtube.com/watch?v=l0zk4Csbpbk)
+
+View our presentation: [Project Presentation](https://www.canva.com/design/DAGlyRPn7kc/UCvT-YSvaCQQ7PgfBAL6Ug/edit?utm_content=DAGlyRPn7kc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 ### Key functionalities include:
 
 - Tracking signup-to-feedback completion rates
@@ -26,7 +32,7 @@ Takes outputs from the Analysis Agent and generates user-friendly visual summari
 
 ### Voice & Style Content Agent
 
-Creates communications (emails, stories, announcements) written in the hackathon organizer’s unique voice, tone, and style. Supports AI-assisted editing to tailor the generated content as needed for different audiences or platforms.
+Creates communications (emails, stories, announcements) written in the hackathon organizer's unique voice, tone, and style. Supports AI-assisted editing to tailor the generated content as needed for different audiences or platforms.
 
 ## Technologies Used
 
