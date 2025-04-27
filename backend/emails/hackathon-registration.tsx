@@ -38,9 +38,9 @@ export default function HackathonRegistrationEmail({
       <Body style={main}>
         <Container style={container}>
           <Img
-            src="https://www.redbull.com/favicon.ico"
-            width="48"
-            height="48"
+            src="https://i.ibb.co/XxpsvQLP/Black-White-Blue-Neon-Intro.png"
+            width="108"
+            height="78"
             alt="Redbull Logo"
             style={logo}
           />
@@ -65,7 +65,7 @@ export default function HackathonRegistrationEmail({
             </Text>
 
             <Button style={button} href={dashboardUrl}>
-              Access Your Dashboard
+              Open canvas course
             </Button>
           </Section>
 
@@ -158,9 +158,9 @@ const textBold = {
 };
 
 const button = {
-  backgroundColor: '#cf102d',
+  backgroundColor: '#ffbd00',
   borderRadius: '4px',
-  color: '#fff',
+  color: '#000',
   display: 'block',
   fontSize: '16px',
   fontWeight: '600',
@@ -188,7 +188,7 @@ const details = {
 };
 
 const link = {
-  color: '#cf102d',
+  color: '#ffbd00',
   textDecoration: 'underline',
 };
 

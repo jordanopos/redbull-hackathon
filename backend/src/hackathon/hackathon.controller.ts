@@ -11,6 +11,7 @@ import {
 import { HackathonService } from './hackathon.service';
 import { CreateHackathonDto } from './dto/create-hackathon.dto';
 import { UpdateHackathonDto } from './dto/update-hackathon.dto';
+import { CreateParticipantDto } from './dto/create-participant.dto';
 
 @Controller('hackathon')
 export class HackathonController {
@@ -76,5 +77,16 @@ export class HackathonController {
   @Get(':id/stats')
   async getHackathonStats(@Param('id') id: string) {
     return this.hackathonService.getHackathonStats(id);
+  }
+
+  @Post(':id/create-participant')
+  async createAndAddParticipant(
+    @Param('id') hackathonId: string,
+    @Body() createParticipantDto: CreateParticipantDto,
+  ) {
+    return this.hackathonService.createAndAddParticipant(
+      hackathonId,
+      createParticipantDto,
+    );
   }
 }

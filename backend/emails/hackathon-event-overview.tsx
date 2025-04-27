@@ -56,18 +56,20 @@ export default function HackathonEventOverview({
   return (
     <Html>
       <Head />
-      <Preview>{hackathonName} Wrap-Up: Celebrating Innovation & Success!</Preview>
+      <Preview>
+        {hackathonName} Wrap-Up: Celebrating Innovation & Success!
+      </Preview>
       <Body style={main}>
         <Container style={container}>
           <Img
-            src="https://www.redbull.com/favicon.ico"
-            width="48"
-            height="48"
+            src="https://i.ibb.co/XxpsvQLP/Black-White-Blue-Neon-Intro.png"
+            width="108"
+            height="78"
             alt="Redbull Logo"
             style={logo}
           />
           <Heading style={h1}>{hackathonName} Wrap-Up</Heading>
-          
+
           {/* Hero Section */}
           <Section style={heroSection}>
             <Text style={heroText}>
@@ -77,11 +79,12 @@ export default function HackathonEventOverview({
 
           {/* Personal Greeting */}
           <Section style={section}>
+            <Text style={text}>Hi {participantName},</Text>
             <Text style={text}>
-              Hi {participantName},
-            </Text>
-            <Text style={text}>
-              What an incredible event! The {hackathonName} has come to a close, but the innovations, connections, and memories will last much longer. We wanted to share some highlights and insights gathered from participants like you.
+              What an incredible event! The {hackathonName} has come to a close,
+              but the innovations, connections, and memories will last much
+              longer. We wanted to share some highlights and insights gathered
+              from participants like you.
             </Text>
           </Section>
 
@@ -105,12 +108,16 @@ export default function HackathonEventOverview({
 
           {/* Winner Announcement */}
           <Section style={winnerSection}>
-            <Heading as="h2" style={h2}>🏆 Winner Announcement</Heading>
+            <Heading as="h2" style={h2}>
+              🏆 Winner Announcement
+            </Heading>
             <Text style={text}>
-              Congratulations to <strong>{winnerName}</strong> for their outstanding project: <strong>{winnerProject}</strong>!
+              Congratulations to <strong>{winnerName}</strong> for their
+              outstanding project: <strong>{winnerProject}</strong>!
             </Text>
             <Text style={text}>
-              Their innovative solution stood out for its technical excellence, practical implementation, and potential impact.
+              Their innovative solution stood out for its technical excellence,
+              practical implementation, and potential impact.
             </Text>
 
             <Button style={photoButton} href={photosUrl}>
@@ -120,52 +127,65 @@ export default function HackathonEventOverview({
 
           {/* Feedback Insights */}
           <Section style={section}>
-            <Heading as="h2" style={h2}>What You Told Us</Heading>
+            <Heading as="h2" style={h2}>
+              What You Told Us
+            </Heading>
             <Text style={text}>
-              We've analyzed all the feedback and wanted to share some key insights:
+              We've analyzed all the feedback and wanted to share some key
+              insights:
             </Text>
             <ul style={list}>
               {keyInsights.map((insight, index) => (
-                <li key={index} style={listItem}>{insight}</li>
+                <li key={index} style={listItem}>
+                  {insight}
+                </li>
               ))}
             </ul>
           </Section>
 
           {/* Highlight Story */}
           <Section style={storySection}>
-            <Heading as="h2" style={h2}>Highlight Story</Heading>
-            <Text style={storyText}>
-              {highlightStory}
-            </Text>
+            <Heading as="h2" style={h2}>
+              Highlight Story
+            </Heading>
+            <Text style={storyText}>{highlightStory}</Text>
           </Section>
 
           {/* Looking Forward */}
           <Section style={section}>
-            <Heading as="h2" style={h2}>Looking Forward</Heading>
+            <Heading as="h2" style={h2}>
+              Looking Forward
+            </Heading>
             <Text style={text}>
-              Based on your feedback, we're already planning our next hackathon! Mark your calendars for <strong>{nextEventDate}</strong> when we'll explore <strong>{nextEventTheme}</strong>.
+              Based on your feedback, we're already planning our next hackathon!
+              Mark your calendars for <strong>{nextEventDate}</strong> when
+              we'll explore <strong>{nextEventTheme}</strong>.
             </Text>
             <Text style={text}>
-              Stay tuned to your dashboard for early registration opportunities and exclusive content.
+              Stay tuned to your dashboard for early registration opportunities
+              and exclusive content.
             </Text>
 
             <Button style={button} href={dashboardUrl}>
-              Visit Your Dashboard
+              Visit Your Canvas Dashboard
             </Button>
           </Section>
 
           <Hr style={hr} />
-          
+
           <Text style={footer}>
-            &copy; {new Date().getFullYear()} Redbull Hackathon Team. All rights reserved.
+            &copy; {new Date().getFullYear()} Redbull Hackathon Team. All rights
+            reserved.
             <br />
             If you have any questions, please contact us at{' '}
             <Link href={`mailto:${supportEmail}`} style={link}>
               {supportEmail}
-            </Link>.
+            </Link>
+            .
             <br />
             <br />
-            This email was sent to you because you participated in {hackathonName}.
+            This email was sent to you because you participated in{' '}
+            {hackathonName}.
           </Text>
         </Container>
       </Body>
@@ -175,7 +195,8 @@ export default function HackathonEventOverview({
 
 const main = {
   backgroundColor: '#f6f9fc',
-  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
+  fontFamily:
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
 };
 
 const container = {
@@ -207,7 +228,7 @@ const h2 = {
 };
 
 const heroSection = {
-  backgroundColor: '#cf102d',
+  backgroundColor: '#ffbd00',
   borderRadius: '6px',
   padding: '40px 24px',
   marginBottom: '24px',
@@ -215,7 +236,7 @@ const heroSection = {
 };
 
 const heroText = {
-  color: '#ffffff',
+  color: '#000',
   fontSize: '24px',
   fontWeight: '600',
   margin: '0',
@@ -246,7 +267,7 @@ const statColumn = {
 };
 
 const statNumber = {
-  color: '#cf102d',
+  color: '#ffbd00',
   fontSize: '32px',
   fontWeight: '700',
   margin: '0',
@@ -265,7 +286,7 @@ const winnerSection = {
   borderRadius: '6px',
   marginBottom: '24px',
   padding: '24px',
-  borderTop: '3px solid #cf102d',
+  borderTop: '3px solid #ffbd00',
 };
 
 const storySection = {
@@ -273,7 +294,7 @@ const storySection = {
   borderRadius: '6px',
   marginBottom: '24px',
   padding: '24px',
-  borderLeft: '3px solid #cf102d',
+  borderLeft: '3px solid #ffbd00',
 };
 
 const text = {
@@ -290,9 +311,9 @@ const storyText = {
 };
 
 const button = {
-  backgroundColor: '#cf102d',
+  backgroundColor: '#ffbd00',
   borderRadius: '4px',
-  color: '#fff',
+  color: '#000',
   display: 'block',
   fontSize: '16px',
   fontWeight: '600',
@@ -319,7 +340,7 @@ const listItem = {
 };
 
 const link = {
-  color: '#cf102d',
+  color: '#ffbd00',
   textDecoration: 'underline',
   margin: '0 4px',
 };
@@ -335,4 +356,4 @@ const footer = {
   lineHeight: '20px',
   marginTop: '12px',
   textAlign: 'center' as const,
-}; 
+};

@@ -37,7 +37,7 @@ export async function getHackathonFeedbackAnalysis(
         headers: {
           "Content-Type": "application/json",
         },
-        // Cache for 15 minutes, but revalidate if a new request comes in
+        
         next: {
           revalidate: 900,
         },

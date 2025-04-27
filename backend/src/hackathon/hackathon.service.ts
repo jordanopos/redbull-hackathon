@@ -1,8 +1,13 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateHackathonDto } from './dto/create-hackathon.dto';
 import { UpdateHackathonDto } from './dto/update-hackathon.dto';
 import { HackathonStatsDto } from './dto/hackathon-stats.dto';
+import { CreateParticipantDto } from './dto/create-participant.dto';
 
 @Injectable()
 export class HackathonService {
@@ -15,7 +20,9 @@ export class HackathonService {
     });
 
     if (existingHackathon) {
-      throw new ConflictException('A hackathon with this URL slug already exists');
+      throw new ConflictException(
+        'A hackathon with this URL slug already exists',
+      );
     }
 
     return this.prisma.hackathon.create({
@@ -90,7 +97,9 @@ export class HackathonService {
       });
 
       if (existingHackathon) {
-        throw new ConflictException('A hackathon with this URL slug already exists');
+        throw new ConflictException(
+          'A hackathon with this URL slug already exists',
+        );
       }
     }
 
@@ -134,7 +143,9 @@ export class HackathonService {
       });
     } catch (error) {
       if (error.code === 'P2002') {
-        throw new ConflictException('Participant is already registered for this hackathon');
+        throw new ConflictException(
+          'Participant is already registered for this hackathon',
+        );
       }
       throw error;
     }
@@ -152,7 +163,11 @@ export class HackathonService {
       });
     } catch (error) {
       if (error.code === 'P2025') {
-        throw new NotFoundException('Participant is not registered for this hackathon');
+        // P2025 is Prisma's "Record not found" error code
+        // This occurs when trying to delete a record that doesn't exist
+        throw new NotFoundException(
+          'Participant is not registered for this hackathon',
+        );
       }
       throw error;
     }
@@ -168,7 +183,7 @@ export class HackathonService {
       },
     });
 
-    return participants.map(hp => hp.participant);
+    return participants.map((hp) => hp.participant);
   }
 
   async getHackathonStats(hackathonId: string): Promise<HackathonStatsDto> {
@@ -192,14 +207,74 @@ export class HackathonService {
     });
 
     // Calculate completion rate (percentage of participants who submitted feedback)
-    const completionRate = totalSignups > 0
-      ? Math.round((totalFeedback / totalSignups) * 100)
-      : 0;
+    const completionRate =
+      totalSignups > 0 ? Math.round((totalFeedback / totalSignups) * 100) : 0;
 
     return {
       totalSignups,
       totalFeedback,
       completionRate,
     };
+  }
+
+  async createAndAddParticipant(
+    hackathonId: string,
+    createParticipantDto: CreateParticipantDto,
+  ) {
+    // Check if the hackathon exists
+    const hackathon = await this.prisma.hackathon.findUnique({
+      where: { id: hackathonId },
+    });
+
+    if (!hackathon) {
+      throw new NotFoundException(`Hackathon with ID ${hackathonId} not found`);
+    }
+
+    // Check if participant already exists with this email
+    let participant = await this.prisma.participant.findUnique({
+      where: { email: createParticipantDto.email },
+    });
+
+    // Create transaction to ensure data consistency
+    return this.prisma.$transaction(async (prisma) => {
+      // If participant doesn't exist, create them
+      if (!participant) {
+        participant = await prisma.participant.create({
+          data: createParticipantDto,
+        });
+      }
+
+      // Check if participant is already registered for this hackathon
+      const existingRegistration = await prisma.hackathonParticipant.findUnique(
+        {
+          where: {
+            hackathonId_participantId: {
+              hackathonId,
+              participantId: participant.id,
+            },
+          },
+        },
+      );
+
+      if (existingRegistration) {
+        throw new ConflictException(
+          'Participant is already registered for this hackathon',
+        );
+      }
+
+      // Create hackathon participant association
+      const hackathonParticipant = await prisma.hackathonParticipant.create({
+        data: {
+          hackathonId,
+          participantId: participant.id,
+        },
+        include: {
+          participant: true,
+          hackathon: true,
+        },
+      });
+
+      return hackathonParticipant;
+    });
   }
 }

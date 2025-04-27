@@ -36,24 +36,26 @@ export default function HackathonFeedbackRequest({
       <Body style={main}>
         <Container style={container}>
           <Img
-            src="https://www.redbull.com/favicon.ico"
-            width="48"
-            height="48"
+            src="https://i.ibb.co/XxpsvQLP/Black-White-Blue-Neon-Intro.png"
+            width="108"
+            height="78"
             alt="Redbull Logo"
             style={logo}
           />
           <Heading style={h1}>Your Feedback Matters!</Heading>
-          
+
           <Section style={section}>
+            <Text style={text}>Hi {participantName},</Text>
             <Text style={text}>
-              Hi {participantName},
-            </Text>
-            <Text style={text}>
-              Thank you for participating in <strong>{hackathonName}</strong>! We hope you had an amazing experience building, learning, and connecting with fellow innovators.
+              Thank you for participating in <strong>{hackathonName}</strong>!
+              We hope you had an amazing experience building, learning, and
+              connecting with fellow innovators.
             </Text>
 
             <Text style={text}>
-              Your insights are incredibly valuable to us as we strive to make our hackathons even better. Please take a few minutes to share your thoughts and experiences by completing our feedback survey.
+              Your insights are incredibly valuable to us as we strive to make
+              our hackathons even better. Please take a few minutes to share
+              your thoughts and experiences by completing our feedback survey.
             </Text>
 
             <Button style={button} href={feedbackFormUrl}>
@@ -61,12 +63,15 @@ export default function HackathonFeedbackRequest({
             </Button>
 
             <Text style={noteText}>
-              The survey should take less than 5 minutes to complete and your responses will remain anonymous.
+              The survey should take less than 5 minutes to complete and your
+              responses will remain anonymous.
             </Text>
           </Section>
 
           <Section style={section}>
-            <Heading as="h2" style={h2}>Why Your Feedback Matters</Heading>
+            <Heading as="h2" style={h2}>
+              Why Your Feedback Matters
+            </Heading>
             <Text style={text}>
               <ul style={list}>
                 <li>Help us improve future hackathons</li>
@@ -76,34 +81,54 @@ export default function HackathonFeedbackRequest({
               </ul>
             </Text>
             <Text style={highlightText}>
-              Please submit your feedback by <strong>{feedbackDeadline}</strong>.
+              Please submit your feedback by <strong>{feedbackDeadline}</strong>
+              .
             </Text>
           </Section>
 
           <Section style={section}>
-            <Heading as="h2" style={h2}>Stay Connected</Heading>
+            <Heading as="h2" style={h2}>
+              Stay Connected
+            </Heading>
             <Text style={text}>
-              Don't forget to connect with us on social media to stay updated on future hackathons, tech events, and innovation opportunities.
+              Don't forget to connect with us on social media to stay updated on
+              future hackathons, tech events, and innovation opportunities.
             </Text>
             <Text style={socialLinks}>
-              <Link href="https://twitter.com/redbull" style={link}>Twitter</Link> • 
-              <Link href="https://www.instagram.com/redbull/" style={link}> Instagram</Link> • 
-              <Link href="https://www.linkedin.com/company/red-bull/" style={link}> LinkedIn</Link>
+              <Link href="https://twitter.com/redbull" style={link}>
+                Twitter
+              </Link>{' '}
+              •
+              <Link href="https://www.instagram.com/redbull/" style={link}>
+                {' '}
+                Instagram
+              </Link>{' '}
+              •
+              <Link
+                href="https://www.linkedin.com/company/red-bull/"
+                style={link}
+              >
+                {' '}
+                LinkedIn
+              </Link>
             </Text>
           </Section>
 
           <Hr style={hr} />
-          
+
           <Text style={footer}>
-            &copy; {new Date().getFullYear()} Redbull Hackathon Team. All rights reserved.
+            &copy; {new Date().getFullYear()} Redbull Hackathon Team. All rights
+            reserved.
             <br />
             If you have any questions, please contact us at{' '}
             <Link href={`mailto:${supportEmail}`} style={link}>
               {supportEmail}
-            </Link>.
+            </Link>
+            .
             <br />
             <br />
-            This email was sent to you because you participated in {hackathonName}.
+            This email was sent to you because you participated in{' '}
+            {hackathonName}.
           </Text>
         </Container>
       </Body>
@@ -113,7 +138,8 @@ export default function HackathonFeedbackRequest({
 
 const main = {
   backgroundColor: '#f6f9fc',
-  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
+  fontFamily:
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
 };
 
 const container = {
@@ -177,9 +203,9 @@ const highlightText = {
 };
 
 const button = {
-  backgroundColor: '#cf102d',
+  backgroundColor: '#ffbd00',
   borderRadius: '4px',
-  color: '#fff',
+  color: '#000',
   display: 'block',
   fontSize: '16px',
   fontWeight: '600',
@@ -202,7 +228,7 @@ const socialLinks = {
 };
 
 const link = {
-  color: '#cf102d',
+  color: '#ffbd00',
   textDecoration: 'underline',
   margin: '0 4px',
 };
@@ -218,4 +244,4 @@ const footer = {
   lineHeight: '20px',
   marginTop: '12px',
   textAlign: 'center' as const,
-}; 
+};
