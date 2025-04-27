@@ -5,6 +5,7 @@ import HackathonRegistrationEmail from '../../emails/hackathon-registration';
 import HackathonFeedbackRequestEmail from '../../emails/hackathon-feedback-request';
 import { Resend } from 'resend';
 import { render } from '@react-email/render';
+import { PrismaClient } from '@prisma/client';
 
 export type EmailType = 'registration' | 'feedback-request';
 

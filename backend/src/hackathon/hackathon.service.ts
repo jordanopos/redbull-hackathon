@@ -8,10 +8,14 @@ import { CreateHackathonDto } from './dto/create-hackathon.dto';
 import { UpdateHackathonDto } from './dto/update-hackathon.dto';
 import { HackathonStatsDto } from './dto/hackathon-stats.dto';
 import { CreateParticipantDto } from './dto/create-participant.dto';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class HackathonService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private mailService: MailService,
+  ) {}
 
   async create(data: CreateHackathonDto) {
     // Check if urlSlug already exists
@@ -235,13 +239,18 @@ export class HackathonService {
       where: { email: createParticipantDto.email },
     });
 
+    let isNewParticipant = false;
+    let participantId = participant?.id;
+
     // Create transaction to ensure data consistency
-    return this.prisma.$transaction(async (prisma) => {
+    const hackathonParticipant = await this.prisma.$transaction(async (prisma) => {
       // If participant doesn't exist, create them
       if (!participant) {
+        isNewParticipant = true;
         participant = await prisma.participant.create({
           data: createParticipantDto,
         });
+        participantId = participant.id;
       }
 
       // Check if participant is already registered for this hackathon
@@ -263,7 +272,7 @@ export class HackathonService {
       }
 
       // Create hackathon participant association
-      const hackathonParticipant = await prisma.hackathonParticipant.create({
+      return prisma.hackathonParticipant.create({
         data: {
           hackathonId,
           participantId: participant.id,
@@ -273,8 +282,15 @@ export class HackathonService {
           hackathon: true,
         },
       });
-
-      return hackathonParticipant;
     });
+
+    // // Now that the transaction is complete, send the email
+    // await this.mailService.sendParticipantEmail(
+    //   participantId,
+    //   hackathon.id,
+    //   'registration',
+    // );
+
+    return hackathonParticipant;
   }
 }

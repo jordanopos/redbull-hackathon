@@ -34,7 +34,9 @@ export default function HackathonRegistrationEmail({
   return (
     <Html>
       <Head />
-      <Preview>You're registered for {hackathonName}! Get ready to innovate.</Preview>
+      <Preview>
+        You're registered for {hackathonName}! Get ready to innovate.
+      </Preview>
       <Body style={main}>
         <Container style={container}>
           <Img
@@ -45,23 +47,25 @@ export default function HackathonRegistrationEmail({
             style={logo}
           />
           <Heading style={h1}>Registration Confirmed!</Heading>
-          
+
           <Section style={section}>
+            <Text style={text}>Hi {participantName},</Text>
             <Text style={text}>
-              Hi {participantName},
-            </Text>
-            <Text style={text}>
-              You're officially registered for <strong>{hackathonName}</strong>. We're excited to have you join us for this amazing event!
+              You're officially registered for <strong>{hackathonName}</strong>.
+              We're excited to have you join us for this amazing event!
             </Text>
 
             <Text style={textBold}>Event Details:</Text>
             <Text style={details}>
-              <strong>Date:</strong> {startDate}<br />
+              <strong>Date:</strong> {startDate}
+              <br />
               <strong>Location:</strong> {location}
             </Text>
 
             <Text style={text}>
-              Make sure to check the participant dashboard for important announcements, schedule updates, and to connect with other participants.
+              Make sure to check the participant dashboard for important
+              announcements, schedule updates, and to connect with other
+              participants.
             </Text>
 
             <Button style={button} href={dashboardUrl}>
@@ -70,10 +74,14 @@ export default function HackathonRegistrationEmail({
           </Section>
 
           <Section style={section}>
-            <Heading as="h2" style={h2}>What's Next?</Heading>
+            <Heading as="h2" style={h2}>
+              What's Next?
+            </Heading>
             <Text style={text}>
               <ul style={list}>
-                <li>Join our pre-event online briefing (details coming soon)</li>
+                <li>
+                  Join our pre-event online briefing (details coming soon)
+                </li>
                 <li>Complete your profile in the participant dashboard</li>
                 <li>Review the competition rules and theme</li>
                 <li>Start forming your team (or join one)</li>
@@ -82,21 +90,27 @@ export default function HackathonRegistrationEmail({
           </Section>
 
           <Section style={section}>
-            <Heading as="h2" style={h2}>Need Help?</Heading>
+            <Heading as="h2" style={h2}>
+              Need Help?
+            </Heading>
             <Text style={text}>
-              If you have any questions or need assistance, please don't hesitate to reach out to our support team at{' '}
+              If you have any questions or need assistance, please don't
+              hesitate to reach out to our support team at{' '}
               <Link href={`mailto:${supportEmail}`} style={link}>
                 {supportEmail}
-              </Link>.
+              </Link>
+              .
             </Text>
           </Section>
 
           <Hr style={hr} />
-          
+
           <Text style={footer}>
-            &copy; {new Date().getFullYear()} Redbull Hackathon Team. All rights reserved.
+            &copy; {new Date().getFullYear()} Redbull Hackathon Team. All rights
+            reserved.
             <br />
-            This email was sent to you because you registered for {hackathonName}.
+            This email was sent to you because you registered for{' '}
+            {hackathonName}.
           </Text>
         </Container>
       </Body>
@@ -106,7 +120,8 @@ export default function HackathonRegistrationEmail({
 
 const main = {
   backgroundColor: '#f6f9fc',
-  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
+  fontFamily:
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
 };
 
 const container = {
@@ -203,4 +218,4 @@ const footer = {
   lineHeight: '20px',
   marginTop: '12px',
   textAlign: 'center' as const,
-}; 
+};
